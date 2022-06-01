@@ -57,7 +57,7 @@ public class Pawn extends Piece {
 
             if(this.x - 1 > 0 && this.y - 1 < 9) { //Player 2 Up Right
                 Piece pieceAtPosition = board.getPieceAt(x - 1, y - 1);
-                if(pieceAtPosition != null && pieceAtPosition.getPlayerNumber() == 2) {
+                if(pieceAtPosition != null && pieceAtPosition.getPlayerNumber() == 1) {
                     possibleMoves.add(new Point(x - 1, y - 1));
                 }
             }
@@ -95,7 +95,7 @@ public class Pawn extends Piece {
 
             if(this.x - 1 > 0 && this.y - 1 < 9) { //Player 2 Up Right
                 Piece pieceAtPosition = board.getPieceAt(x - 1, y - 1);
-                if(pieceAtPosition != null && pieceAtPosition.getPlayerNumber() == 2) {
+                if(pieceAtPosition != null && pieceAtPosition.getPlayerNumber() == 1) {
                     possibleKillingMoves.add(new Point(x - 1, y - 1));
                 }
             }

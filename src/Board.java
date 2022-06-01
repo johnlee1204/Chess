@@ -67,7 +67,7 @@ public class Board {
         if(this.winningPlayer != 0) {
             System.out.println("Player " + this.winningPlayer + " has won! Game took " + this.moveCount + " moves.");
         } else {
-            System.out.println("Stalemate! 0 possible moves for a player!.");
+            System.out.println("Stalemate! 0 possible moves for a player!.  Game took " + this.moveCount + " moves.");
         }
     }
 
@@ -115,6 +115,8 @@ public class Board {
                 this.winningPlayer = playerNumber;
             }
 
+            System.out.println();
+            System.out.println("Player " + playerNumber + " moved " + pieceToMove.getSymbol() + " from " + pieceToMove.getX() + "," + pieceToMove.getY() + " to " + (int)possibleKillingMoves.get(moveIndex).getX() + "," + (int)possibleKillingMoves.get(moveIndex).getY() + " killing a " + pieceToKill.getSymbol());
             pieceToMove.setX((int)possibleKillingMoves.get(moveIndex).getX());
             pieceToMove.setY((int)possibleKillingMoves.get(moveIndex).getY());
         } else {
@@ -126,6 +128,8 @@ public class Board {
 
             int moveIndex = (int)(Math.random() * possibleMoves.size());
 
+            System.out.println();
+            System.out.println("Player " + playerNumber + " moved " + pieceToMove.getSymbol() + " from " + pieceToMove.getX() + "," + pieceToMove.getY() + " to " + (int)possibleMoves.get(moveIndex).getX() + "," + (int)possibleMoves.get(moveIndex).getY());
             pieceToMove.setX((int)possibleMoves.get(moveIndex).getX());
             pieceToMove.setY((int)possibleMoves.get(moveIndex).getY());
         }
@@ -144,9 +148,6 @@ public class Board {
     }
 
     private void drawBoard() {
-        for(int x = 0; x < 10; x++) {
-            System.out.println();
-        }
 
         System.out.print("-------------------------");
         System.out.println();
@@ -167,10 +168,13 @@ public class Board {
         System.out.print("-------------------------");
 
         try {
-            Thread.sleep(10);
+            Thread.sleep(100);
         }
         catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
+        }
+        for(int x = 0; x < 10; x++) {
+            System.out.println();
         }
     }
 }

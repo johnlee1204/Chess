@@ -1,3 +1,6 @@
+import java.awt.*;
+import java.util.ArrayList;
+
 public class Rook extends Piece {
     public Rook(int x, int y, int playerNumber) {
         super(x,y, playerNumber);
@@ -9,5 +12,207 @@ public class Rook extends Piece {
         } else {
             return 'r';
         }
+    }
+
+    public ArrayList<Point> getPossibleMoves(Board board) {
+        ArrayList<Point> possibleMoves = new ArrayList<>();
+
+        boolean right = true, left = true, up = true, down = true;
+        if(this.getPlayerNumber() == 1) {
+            for(int i = 1; i < 9; i++) {
+                if(this.x + i < 9 && right) { //Right
+                    Piece pieceAtPosition = board.getPieceAt(this.x + i, this.y);
+                    if(pieceAtPosition != null) {
+                        if(pieceAtPosition.getPlayerNumber() != this.getPlayerNumber()) {
+                            possibleMoves.add(new Point(this.x + i, this.y));
+                        }
+                        right = false;
+                    } else {
+                        possibleMoves.add(new Point(this.x + i, this.y));
+                    }
+                }
+
+                if(this.x - i > 0 && left) { //Left
+                    Piece pieceAtPosition = board.getPieceAt(this.x - i, this.y);
+                    if(pieceAtPosition != null) {
+                        if(pieceAtPosition.getPlayerNumber() != this.getPlayerNumber()) {
+                            possibleMoves.add(new Point(this.x - i, this.y));
+                        }
+                        left = false;
+                    } else {
+                        possibleMoves.add(new Point(this.x - i, this.y));
+                    }
+                }
+
+                if(this.y + i < 9 && up) { //Up
+                    Piece pieceAtPosition = board.getPieceAt(this.x, this.y + i);
+                    if(pieceAtPosition != null) {
+                        if(pieceAtPosition.getPlayerNumber() != this.getPlayerNumber()) {
+                            possibleMoves.add(new Point(this.x, this.y + i));
+                        }
+                        up = false;
+                    } else {
+                        possibleMoves.add(new Point(this.x, this.y + i));
+                    }
+                }
+
+                if(this.y - i > 0 && down) { //Down
+                    Piece pieceAtPosition = board.getPieceAt(this.x, this.y - i);
+                    if(pieceAtPosition != null) {
+                        if(pieceAtPosition.getPlayerNumber() != this.getPlayerNumber()) {
+                            possibleMoves.add(new Point(this.x, this.y - i));
+                        }
+                        down = false;
+                    } else {
+                        possibleMoves.add(new Point(this.x, this.y - i));
+                    }
+                }
+            }
+        } else {
+            for(int i = 1; i < 9; i++) {
+                if(this.x - i > 0 && right) { //Right
+                    Piece pieceAtPosition = board.getPieceAt(this.x - i, this.y);
+                    if(pieceAtPosition != null) {
+                        if(pieceAtPosition.getPlayerNumber() != this.getPlayerNumber()) {
+                            possibleMoves.add(new Point(this.x - i, this.y));
+                        }
+                        right = false;
+                    } else {
+                        possibleMoves.add(new Point(this.x - i, this.y));
+                    }
+                }
+
+                if(this.x + i < 9 && left) { //Left
+                    Piece pieceAtPosition = board.getPieceAt(this.x + i, this.y);
+                    if(pieceAtPosition != null) {
+                        if(pieceAtPosition.getPlayerNumber() != this.getPlayerNumber()) {
+                            possibleMoves.add(new Point(this.x + i, this.y));
+                        }
+                        left = false;
+                    } else {
+                        possibleMoves.add(new Point(this.x + i, this.y));
+                    }
+                }
+
+                if(this.y - i > 0 && up) { //Up
+                    Piece pieceAtPosition = board.getPieceAt(this.x, this.y - i);
+                    if(pieceAtPosition != null) {
+                        if(pieceAtPosition.getPlayerNumber() != this.getPlayerNumber()) {
+                            possibleMoves.add(new Point(this.x, this.y - i));
+                        }
+                        up = false;
+                    } else {
+                        possibleMoves.add(new Point(this.x, this.y - i));
+                    }
+                }
+
+                if(this.y + i < 0 && down) { //Down
+                    Piece pieceAtPosition = board.getPieceAt(this.x, this.y + i);
+                    if(pieceAtPosition != null) {
+                        if(pieceAtPosition.getPlayerNumber() != this.getPlayerNumber()) {
+                            possibleMoves.add(new Point(this.x, this.y + i));
+                        }
+                        down = false;
+                    } else {
+                        possibleMoves.add(new Point(this.x, this.y + i));
+                    }
+                }
+            }
+        }
+
+        return possibleMoves;
+    }
+
+    public ArrayList<Point> getPossibleKillingMoves(Board board) {
+        ArrayList<Point> possibleKillingMoves = new ArrayList<>();
+
+        boolean right = true, left = true, up = true, down = true;
+        if(this.getPlayerNumber() == 1) {
+            for(int i = 1; i < 9; i++) {
+                if(this.x + i < 9 && right) { //Right
+                    Piece pieceAtPosition = board.getPieceAt(this.x + i, this.y);
+                    if(pieceAtPosition != null) {
+                        if(pieceAtPosition.getPlayerNumber() != this.getPlayerNumber()) {
+                            possibleKillingMoves.add(new Point(this.x + i, this.y));
+                        }
+                        right = false;
+                    }
+                }
+
+                if(this.x - i > 0 && left) { //Left
+                    Piece pieceAtPosition = board.getPieceAt(this.x - i, this.y);
+                    if(pieceAtPosition != null) {
+                        if(pieceAtPosition.getPlayerNumber() != this.getPlayerNumber()) {
+                            possibleKillingMoves.add(new Point(this.x - i, this.y));
+                        }
+                        left = false;
+                    }
+                }
+
+                if(this.y + i < 9 && up) { //Up
+                    Piece pieceAtPosition = board.getPieceAt(this.x, this.y + i);
+                    if(pieceAtPosition != null) {
+                        if(pieceAtPosition.getPlayerNumber() != this.getPlayerNumber()) {
+                            possibleKillingMoves.add(new Point(this.x, this.y + i));
+                        }
+                        up = false;
+                    }
+                }
+
+                if(this.y - i > 0 && down) { //Down
+                    Piece pieceAtPosition = board.getPieceAt(this.x, this.y - i);
+                    if(pieceAtPosition != null) {
+                        if(pieceAtPosition.getPlayerNumber() != this.getPlayerNumber()) {
+                            possibleKillingMoves.add(new Point(this.x, this.y - i));
+                        }
+                        down = false;
+                    }
+                }
+            }
+        } else {
+            for(int i = 1; i < 9; i++) {
+                if(this.x - i > 0 && right) { //Right
+                    Piece pieceAtPosition = board.getPieceAt(this.x - i, this.y);
+                    if(pieceAtPosition != null) {
+                        if(pieceAtPosition.getPlayerNumber() != this.getPlayerNumber()) {
+                            possibleKillingMoves.add(new Point(this.x - i, this.y));
+                        }
+                        right = false;
+                    }
+                }
+
+                if(this.x + i < 9 && left) { //Left
+                    Piece pieceAtPosition = board.getPieceAt(this.x + i, this.y);
+                    if(pieceAtPosition != null) {
+                        if(pieceAtPosition.getPlayerNumber() != this.getPlayerNumber()) {
+                            possibleKillingMoves.add(new Point(this.x + i, this.y));
+                        }
+                        left = false;
+                    }
+                }
+
+                if(this.y - i > 0 && up) { //Up
+                    Piece pieceAtPosition = board.getPieceAt(this.x, this.y - i);
+                    if(pieceAtPosition != null) {
+                        if(pieceAtPosition.getPlayerNumber() != this.getPlayerNumber()) {
+                            possibleKillingMoves.add(new Point(this.x, this.y - i));
+                        }
+                        up = false;
+                    }
+                }
+
+                if(this.y + i < 9 && down) { //Down
+                    Piece pieceAtPosition = board.getPieceAt(this.x, this.y + i);
+                    if(pieceAtPosition != null) {
+                        if(pieceAtPosition.getPlayerNumber() != this.getPlayerNumber()) {
+                            possibleKillingMoves.add(new Point(this.x, this.y + i));
+                        }
+                        down = false;
+                    }
+                }
+            }
+        }
+
+        return possibleKillingMoves;
     }
 }
